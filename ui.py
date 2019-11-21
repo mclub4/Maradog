@@ -1,9 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5 import QtCore
 import sys
-import keyboard
 
 gif_file = "avatar_walk1_default.gif"
 class GifPlayer(QWidget):
@@ -20,26 +18,27 @@ class GifPlayer(QWidget):
         palette.setBrush(10, QBrush(modified_background_image))
         self.setPalette(palette)
 
+        # create main layout
+        main_layout = QVBoxLayout()
+        self.setLayout(main_layout)
+
+
+        # block
+        self.block = Block(10, 10)
+        main_layout.addWidget(self.block)
+        self.block2 = Block(10, 20)
+        main_layout.addWidget(self.block2)
+
         # character
         self.movie = QMovie(gif_file, QByteArray(), self)
         self.character = QLabel()
         self.character.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.character.setAlignment(Qt.AlignCenter)
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(self.character)
-        self.setLayout(main_layout)
         self.movie.setCacheMode(QMovie.CacheAll)
         self.character.setMovie(self.movie)
         self.movie.start()
         self.movie.loopCount()
-        self.character.show()
-
-        # button event test
-        button = QPushButton('refresh gif', self)
-        button.setToolTip('This is an example button')
-        button.move(10,10)
-        button.clicked.connect(self.on_click)
-        main_layout.addWidget(button)
+        main_layout.addWidget(self.character)
 
 
     def keyPressEvent(self, e):
@@ -65,6 +64,16 @@ class GifPlayer(QWidget):
         self.character.setMovie(self.movie)
         self.movie.start()
         print("done")
+
+
+
+class Block(QLabel):
+    def __init__(self, x, y):
+        super().__init__()
+        block_image = QPixmap('block.png')
+        self.setPixmap(block_image)
+        self.resize(10, 10)
+        self.move(x, y)
 
 
 
