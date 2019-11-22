@@ -52,7 +52,6 @@ class GifPlayer(QWidget):
         # up
         elif e.key() == Qt.Key_W:
             self.character.move(self.character.pos().x(), self.character.pos().y() - 5)
-
         # down
         elif e.key() == Qt.Key_S:
             self.character.move(self.character.pos().x(), self.character.pos().y() + 5)
