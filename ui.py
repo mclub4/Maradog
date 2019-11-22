@@ -13,7 +13,7 @@ class Ui(QWidget):
         self.setWindowTitle("Forest of Patience")
 
         # background
-        background_image = QImage('back_ground_1.png')
+        background_image = QImage('resource/back_ground_1.png')
         modified_background_image = background_image.scaled(QSize(1046, 3772))  # original 1046 x 3772
         palette = QPalette()
         palette.setBrush(10, QBrush(modified_background_image))

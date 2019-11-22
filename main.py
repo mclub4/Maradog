@@ -10,7 +10,7 @@ import sys
 app = QApplication(sys.argv)
 
 ui = Ui()
-player = GifPlayer("update this gif", "avatar_walk1_default.gif", ui.main_layout)
+player = GifPlayer("update this gif", "resource/avatar_walk1_default.gif", ui.main_layout)
 ui.show()
 
 
