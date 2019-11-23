@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
-from test import *
+from initial import Main
 
 your_character = "resource/avatar_walk1_default.gif"
 

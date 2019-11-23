@@ -46,13 +46,27 @@ class Main(QWidget):
         # right
         if e.key() == Qt.Key_D:
             self.character.move(self.character.pos().x() + 5, self.character.pos().y())
-            # 오른쪽 으로 방향 돌린 gif 로 설정
+
+            # initial character
+            self.movie = QMovie('resource/avatar_walk1_default_flip.gif', QByteArray(), self)
+            self.character.setMovie(self.movie)
+            self.movie.start()
+            self.movie.loopCount()
+
         # left
         elif e.key() == Qt.Key_A:
             self.character.move(self.character.pos().x() - 5, self.character.pos().y())
+
+            # initial character
+            self.movie = QMovie('resource/avatar_walk1_default.gif', QByteArray(), self)
+            self.character.setMovie(self.movie)
+            self.movie.start()
+            self.movie.loopCount()
+
         # up
         elif e.key() == Qt.Key_W:
             self.character.move(self.character.pos().x(), self.character.pos().y() - 5)
+
         # down
         elif e.key() == Qt.Key_S:
             self.character.move(self.character.pos().x(), self.character.pos().y() + 5)
