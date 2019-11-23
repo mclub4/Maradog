@@ -7,6 +7,8 @@ import sys
 
 
 class Main(QWidget):
+    is_first_right = True
+    is_first_left = True
     def __init__(self, title, gif_file, parent=None):
         QWidget.__init__(self, parent)
 
@@ -41,35 +43,49 @@ class Main(QWidget):
         main_layout.addWidget(self.character)
 
 
-
     def keyPressEvent(self, e):
+        print("keyInput : ", self.character.pos().x(), self.character.pos().y())
         # right
         if e.key() == Qt.Key_D:
-            self.character.move(self.character.pos().x() + 5, self.character.pos().y())
+            print("before : ", self.character.pos().x(), self.character.pos().y())
+            if self.is_first_right:
+                # initial character
+                self.movie = QMovie('resource/avatar_walk1_default_flip.gif', QByteArray(), self)
+                self.character.setMovie(self.movie)
+                self.movie.start()
+                self.movie.loopCount()
+                self.is_first_right = False
+                self.is_first_left = True
+                print("ing : ", self.character.pos().x(), self.character.pos().y())
 
-            # initial character
-            self.movie = QMovie('resource/avatar_walk1_default_flip.gif', QByteArray(), self)
-            self.character.setMovie(self.movie)
-            self.movie.start()
-            self.movie.loopCount()
+            self.character.move(self.character.pos().x() + 5, self.character.pos().y())
+            print("after : ", self.character.pos().x(), self.character.pos().y())
 
         # left
         elif e.key() == Qt.Key_A:
-            self.character.move(self.character.pos().x() - 5, self.character.pos().y())
+            if self.is_first_left:
+                # initial character
+                self.movie = QMovie('resource/avatar_walk1_default.gif', QByteArray(), self)
+                self.character.setMovie(self.movie)
+                self.character.move(self.character.pos().x(), self.character.pos().y())
+                self.movie.start()
+                self.movie.loopCount()
+                self.is_first_left = False
+                self.is_first_right = True
 
-            # initial character
-            self.movie = QMovie('resource/avatar_walk1_default.gif', QByteArray(), self)
-            self.character.setMovie(self.movie)
-            self.movie.start()
-            self.movie.loopCount()
+            self.character.move(self.character.pos().x() - 5, self.character.pos().y())
+            print(self.character.pos().x(), self.character.pos().y())
+
 
         # up
         elif e.key() == Qt.Key_W:
             self.character.move(self.character.pos().x(), self.character.pos().y() - 5)
+            print(self.character.pos().x(), self.character.pos().y())
 
         # down
         elif e.key() == Qt.Key_S:
             self.character.move(self.character.pos().x(), self.character.pos().y() + 5)
+            print(self.character.pos().x(), self.character.pos().y())
 
 
 
