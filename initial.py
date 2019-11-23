@@ -9,6 +9,8 @@ import sys
 class Main(QWidget):
     is_first_right = True
     is_first_left = True
+    current_x = 0
+    current_y = 0
     def __init__(self, title, gif_file, parent=None):
         QWidget.__init__(self, parent)
 
@@ -44,10 +46,9 @@ class Main(QWidget):
 
 
     def keyPressEvent(self, e):
-        print("keyInput : ", self.character.pos().x(), self.character.pos().y())
+        self.character.move(self.current_x, self.current_y)
         # right
         if e.key() == Qt.Key_D:
-            print("before : ", self.character.pos().x(), self.character.pos().y())
             if self.is_first_right:
                 # initial character
                 self.movie = QMovie('resource/avatar_walk1_default_flip.gif', QByteArray(), self)
@@ -56,10 +57,11 @@ class Main(QWidget):
                 self.movie.loopCount()
                 self.is_first_right = False
                 self.is_first_left = True
-                print("ing : ", self.character.pos().x(), self.character.pos().y())
-
-            self.character.move(self.character.pos().x() + 5, self.character.pos().y())
-            print("after : ", self.character.pos().x(), self.character.pos().y())
+                self.current_x = self.character.pos().x()
+                self.current_y = self.character.pos().y()
+            self.character.move(self.current_x + 5, self.current_y)
+            self.current_x = self.character.pos().x()
+            self.current_y = self.character.pos().y()
 
         # left
         elif e.key() == Qt.Key_A:
@@ -67,25 +69,29 @@ class Main(QWidget):
                 # initial character
                 self.movie = QMovie('resource/avatar_walk1_default.gif', QByteArray(), self)
                 self.character.setMovie(self.movie)
-                self.character.move(self.character.pos().x(), self.character.pos().y())
+                self.character.move(self.current_x, self.current_y)
                 self.movie.start()
                 self.movie.loopCount()
                 self.is_first_left = False
                 self.is_first_right = True
-
-            self.character.move(self.character.pos().x() - 5, self.character.pos().y())
-            print(self.character.pos().x(), self.character.pos().y())
+                self.current_x = self.character.pos().x()
+                self.current_y = self.character.pos().y()
+            self.character.move(self.current_x - 5, self.current_y)
+            self.current_x = self.character.pos().x()
+            self.current_y = self.character.pos().y()
 
 
         # up
         elif e.key() == Qt.Key_W:
-            self.character.move(self.character.pos().x(), self.character.pos().y() - 5)
-            print(self.character.pos().x(), self.character.pos().y())
+            self.character.move(self.current_x, self.current_y - 5)
+            self.current_x = self.character.pos().x()
+            self.current_y = self.character.pos().y()
 
         # down
         elif e.key() == Qt.Key_S:
-            self.character.move(self.character.pos().x(), self.character.pos().y() + 5)
-            print(self.character.pos().x(), self.character.pos().y())
+            self.character.move(self.current_x, self.current_y + 5)
+            self.current_x = self.character.pos().x()
+            self.current_y = self.character.pos().y()
 
 
 
