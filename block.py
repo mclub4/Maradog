@@ -7,7 +7,7 @@ import sys
 class Block(QLabel):
     def __init__(self, x, y):
         super().__init__()
-        block_image = QPixmap('block.png')
+        block_image = QPixmap('resource/block.png')
         self.setPixmap(block_image)
         self.resize(10, 10)
         self.move(x, y)
