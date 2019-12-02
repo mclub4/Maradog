@@ -4,19 +4,14 @@ from PyQt5.QtCore import *
 from block import Block
 import sys
 import time
+from character import *
 
-class MyLabel(QLabel):
-    def __init__(self):
-        super().__init__()
-
-    def setMovie(self, QMovie, x, y):
-        super().setMovie(QMovie)
-        self.move(x, y)
 
 
 class Main(QWidget):
     is_first_right = True
     is_first_left = True
+    is_first = True
     current_x = 0
     current_y = 0
     def __init__(self, title, gif_file, parent=None):
@@ -38,12 +33,12 @@ class Main(QWidget):
         self.setPalette(palette)
 
         # blocks
-        block = Block(10, 10)
+        block = Block(20000, 1000)
         main_layout.addWidget(block)
 
         # character
         self.movie = QMovie(gif_file, QByteArray(), self)
-        self.character = MyLabel()
+        self.character = Character()
         self.character.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.character.setAlignment(Qt.AlignCenter)
         self.movie.setCacheMode(QMovie.CacheAll)
@@ -68,13 +63,14 @@ class Main(QWidget):
                 self.current_y = self.character.pos().y()
                 self.is_first_right = False
                 self.is_first_left = True
+                self.is_first = True
+                print('click')
             # self.character.move(self.current_x + 5, self.current_y)
             self.character.move(self.current_x + 1, self.current_y)
             self.character.setVisible(True)
             self.character.move(self.current_x + 4, self.current_y)
             self.current_x = self.character.pos().x()
             self.current_y = self.character.pos().y()
-            print(self.character.pos().x() , "," , self.character.pos().y())
 
 
         # left
@@ -90,13 +86,13 @@ class Main(QWidget):
                 self.current_y = self.character.pos().y()
                 self.is_first_right = True
                 self.is_first_left = False
+                self.is_first = True
             # self.character.move(self.current_x + 5, self.current_y)
             self.character.move(self.current_x - 1, self.current_y)
             self.character.setVisible(True)
             self.character.move(self.current_x - 4, self.current_y)
             self.current_x = self.character.pos().x()
             self.current_y = self.character.pos().y()
-            print(self.character.pos().x() , "," , self.character.pos().y())
 
 
         # up
@@ -110,6 +106,56 @@ class Main(QWidget):
             self.character.move(self.current_x, self.current_y + 5)
             self.current_x = self.character.pos().x()
             self.current_y = self.character.pos().y()
+
+
+    # def keyReleaseEvent(self, e):
+    #     key = eventQKeyEvent.key()
+    #     if key == 54:
+    #         print('released')
+
+    def keyReleaseEvent(self, eventQKeyEvent):
+        key = eventQKeyEvent.key()
+        print(key)
+        # release right
+        if key == 68 and not eventQKeyEvent.isAutoRepeat():
+            if self.is_first:
+                self.character.setVisible(False)
+                print('released')
+                self.current_x = self.character.pos().x()
+                self.current_y = self.character.pos().y()
+                self.character.move(self.current_x, self.current_y)
+                self.movie = QMovie('resource/avatar_stand1_default_flip.gif', QByteArray(), self)
+                self.character.setMovie(self.movie, self.current_x, self.current_y)
+                self.movie.start()
+                self.movie.loopCount()
+                self.character.move(self.current_x - 2, self.current_y)
+                self.character.setVisible(True)
+                self.character.move(self.current_x + 2, self.current_y)
+                self.current_x = self.character.pos().x()
+                self.current_y = self.character.pos().y()
+                self.is_first = False
+                self.is_first_right = True
+            print(self.is_first)
+
+        elif key == 65 and not eventQKeyEvent.isAutoRepeat():
+            if self.is_first:
+                self.character.setVisible(False)
+                print('released')
+                self.current_x = self.character.pos().x()
+                self.current_y = self.character.pos().y()
+                self.character.move(self.current_x, self.current_y)
+                self.movie = QMovie('resource/avatar_stand1_default_flip.gif', QByteArray(), self)
+                self.character.setMovie(self.movie, self.current_x, self.current_y)
+                self.movie.start()
+                self.movie.loopCount()
+                self.character.move(self.current_x - 2, self.current_y)
+                self.character.setVisible(True)
+                self.character.move(self.current_x + 2, self.current_y)
+                self.current_x = self.character.pos().x()
+                self.current_y = self.character.pos().y()
+                self.is_first = False
+                self.is_first_right = True
+            print(self.is_first)
 
 
 

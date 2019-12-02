@@ -9,5 +9,5 @@ class Block(QLabel):
         super().__init__()
         block_image = QPixmap('resource/block.png')
         self.setPixmap(block_image)
-        self.resize(10, 10)
+        self.resize(10000, 10000)
         self.move(x, y)
