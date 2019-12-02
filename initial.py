@@ -11,7 +11,8 @@ from character import *
 class Main(QWidget):
     is_first_right = True
     is_first_left = True
-    is_first = True
+    is_first_release_right = True
+    is_first_release_left = True
     current_x = 0
     current_y = 0
     def __init__(self, title, gif_file, parent=None):
@@ -63,7 +64,7 @@ class Main(QWidget):
                 self.current_y = self.character.pos().y()
                 self.is_first_right = False
                 self.is_first_left = True
-                self.is_first = True
+                self.is_first_release_right = True
                 print('click')
             # self.character.move(self.current_x + 5, self.current_y)
             self.character.move(self.current_x + 1, self.current_y)
@@ -86,7 +87,7 @@ class Main(QWidget):
                 self.current_y = self.character.pos().y()
                 self.is_first_right = True
                 self.is_first_left = False
-                self.is_first = True
+                self.is_first_release_left = True
             # self.character.move(self.current_x + 5, self.current_y)
             self.character.move(self.current_x - 1, self.current_y)
             self.character.setVisible(True)
@@ -108,17 +109,12 @@ class Main(QWidget):
             self.current_y = self.character.pos().y()
 
 
-    # def keyReleaseEvent(self, e):
-    #     key = eventQKeyEvent.key()
-    #     if key == 54:
-    #         print('released')
-
     def keyReleaseEvent(self, eventQKeyEvent):
         key = eventQKeyEvent.key()
         print(key)
         # release right
         if key == 68 and not eventQKeyEvent.isAutoRepeat():
-            if self.is_first:
+            if self.is_first_release_right:
                 self.character.setVisible(False)
                 print('released')
                 self.current_x = self.character.pos().x()
@@ -133,18 +129,17 @@ class Main(QWidget):
                 self.character.move(self.current_x + 2, self.current_y)
                 self.current_x = self.character.pos().x()
                 self.current_y = self.character.pos().y()
-                self.is_first = False
+                self.is_first_release_right = False
                 self.is_first_right = True
-            print(self.is_first)
 
         elif key == 65 and not eventQKeyEvent.isAutoRepeat():
-            if self.is_first:
+            if self.is_first_release_left:
                 self.character.setVisible(False)
                 print('released')
                 self.current_x = self.character.pos().x()
                 self.current_y = self.character.pos().y()
                 self.character.move(self.current_x, self.current_y)
-                self.movie = QMovie('resource/avatar_stand1_default_flip.gif', QByteArray(), self)
+                self.movie = QMovie('resource/avatar_stand1_default.gif', QByteArray(), self)
                 self.character.setMovie(self.movie, self.current_x, self.current_y)
                 self.movie.start()
                 self.movie.loopCount()
@@ -153,10 +148,8 @@ class Main(QWidget):
                 self.character.move(self.current_x + 2, self.current_y)
                 self.current_x = self.character.pos().x()
                 self.current_y = self.character.pos().y()
-                self.is_first = False
-                self.is_first_right = True
-            print(self.is_first)
-
+                self.is_first_release_left = False
+                self.is_first_left = True
 
 
 if __name__ == "__main__":
