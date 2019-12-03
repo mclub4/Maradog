@@ -1,9 +1,4 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 from block import Block
-import sys
-import time
 from character import *
 
 
@@ -38,6 +33,7 @@ class Main(QWidget):
 
     def keyPressEvent(self, event):
         self.character.keyPressEvent(event)
+
 
     def keyReleaseEvent(self, event):
         self.character.keyReleaseEvent(event)
