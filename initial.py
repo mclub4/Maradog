@@ -1,5 +1,5 @@
-from block import Block
 from character import *
+from skills.showSkill import *
 
 
 class Main(QWidget):
@@ -28,14 +28,14 @@ class Main(QWidget):
         # character
         self.character = Character()
         self.character.setVisible(False)
-        # self.character.move(100, 1000)
-        # print(self.character.pos().x(), self.character.pos().y())
         main_layout.addWidget(self.character)
 
+        # skill
+        self.skill = Skill()
+        main_layout.addWidget(self.skill)
 
     def keyPressEvent(self, event):
         self.character.keyPressEvent(event)
-
         if event.key() == Qt.Key_Escape:
             self.close()
 
