@@ -3,43 +3,41 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
 
-is_first_right = True
-is_first_left = True
-is_first_release_right = True
-is_first_release_left = True
-current_x = -832  # -832
-current_y = 327
-
-def initial(self, character, movie):
-    character.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-    character.setAlignment(Qt.AlignCenter)
-    character.move(100, 820)
+def initial(self, skill, movie):
+    skill.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    skill.setAlignment(Qt.AlignCenter)
+    skill.move(200, 720)
     movie.setCacheMode(QMovie.CacheAll)
-    character.setMovie(self.movie)
+    skill.setMovie(self.movie)
     movie.start()
     movie.loopCount()
 
-# def setMovie(self, QMovie, x, y):
-#     super().setMovie(QMovie)
-#     self.move(x, y)
+def __init__(self):
+    super().__init__()
+    self.setVisible(False)
+    self.movie = QMovie('resource/skill_6.gif', QByteArray(), self)
+    self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    self.setAlignment(Qt.AlignCenter)
+    self.movie.setCacheMode(QMovie.CacheAll)
+    self.move(10, 100)
+    self.setMovie(self.movie, self.current_x, self.current_y)
+    self.movie.start()
+    self.movie.loopCount()
+    self.move(self.current_x + 1, self.current_y)
+    self.setVisible(True)
+    self.move(self.current_x - 1, self.current_y)
 
-def keyPressEvent2(self, event):
-    # right
-    if event.key() == Qt.Key_D:
-        self.character.move(self.character.pos().x() + 5, self.character.pos().y())
+def setMovie(self, QMovie, x, y):
+    super().setMovie(QMovie)
+    self.move(x, y)
 
-    # left
-    elif event.key() == Qt.Key_A:
-        self.character.move(self.character.pos().x() - 5, self.character.pos().y())
-
-
-
-
-def keyPressEvent(self, event):
+def keyPressEvent(self, e):
     self.move(self.current_x, self.current_y)
+    print(self.current_x, self.current_y)
+    print("위는 커렌트 아래는 현재")
+    print(self.pos().x(), self.pos().y())
     # right
-    if event.key() == Qt.Key_D:
-        print(self.pos().x(), self.pos().y())
+    if e.key() == Qt.Key_D:
         if self.is_first_right:
             # initial character
             self.setVisible(False)
@@ -61,11 +59,11 @@ def keyPressEvent(self, event):
         self.current_y = self.pos().y()
 
     # left
-    elif event.key() == Qt.Key_A:
+    elif e.key() == Qt.Key_A:
         if self.is_first_left:
             # initial character
             self.setVisible(False)
-            self.movie = QMovie('resource/avatar_walk1_default_flip.gif', QByteArray(), self)
+            self.movie = QMovie('resource/avatar_walk1_default.gif', QByteArray(), self)
             self.setMovie(self.movie, self.current_x, self.current_y)
             self.movie.start()
             self.movie.loopCount()
@@ -111,7 +109,7 @@ def keyReleaseEvent(self, event):
             self.current_x = self.pos().x()
             self.current_y = self.pos().y()
             self.move(self.current_x, self.current_y)
-            self.movie = QMovie('resource/avatar_stand1_default_flip.gif', QByteArray(), self)
+            self.movie = QMovie('resource/avatar_stand1_default.gif', QByteArray(), self)
             self.setMovie(self.movie, self.current_x, self.current_y)
             self.movie.start()
             self.movie.loopCount()
