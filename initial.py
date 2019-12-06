@@ -40,7 +40,7 @@ class Main(QWidget):
 
     def keyPressEvent(self, event):
         # character.keyPressEvent2(self, event)
-        showSkill.keyPressEvent3(self, event)
+        showSkill.skill_activate(self, event)
         self.current_x = self.character.pos().x()
         self.current_y = self.character.pos().y()
         # right
