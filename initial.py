@@ -1,6 +1,9 @@
 import character
-from skills.showSkill import *
-import skills.showSkill
+import skills.showSkill as showSkill
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
 
 
 class Main(QWidget):
@@ -24,12 +27,13 @@ class Main(QWidget):
         character.initial(self, self.character, self.movie)
 
         # skill
-        self.movie = self.movie = QMovie("resource/skill_6.gif", QByteArray(), self)
+        # self.movie = self.movie = QMovie("resource/skill_6.gif", QByteArray(), self)
         self.skill = QLabel(self)
-        skills.showSkill.initial(self, self.skill, self.movie)
+        self.skill.setVisible(False)
 
     def keyPressEvent(self, event):
         character.keyPressEvent2(self, event)
+        showSkill.keyPressEvent3(self, event)
 
         if event.key() == Qt.Key_Escape:
             self.close()
