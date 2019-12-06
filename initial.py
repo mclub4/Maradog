@@ -1,5 +1,6 @@
-from character import *
+import character
 from skills.showSkill import *
+import skills.showSkill
 
 
 class Main(QWidget):
@@ -10,10 +11,6 @@ class Main(QWidget):
         self.resize(1440, 627)  # original 1046 x 3772
         self.setWindowTitle("Forest of Patience")
 
-        # create main layout
-        main_layout = QVBoxLayout()
-        self.setLayout(main_layout)
-
         # background
         background_image = QImage('resource/back_ground_4.png')
         modified_background_image = background_image.scaled(QSize(2000, 1080))  # original 3326 X 880
@@ -21,27 +18,24 @@ class Main(QWidget):
         palette.setBrush(10, QBrush(modified_background_image))
         self.setPalette(palette)
 
-        # # blocks
-        # block = Block(20000, 1000)
-        # main_layout.addWidget(block)
-
         # character
-        self.character = Character()
-        self.character.setVisible(False)
-        main_layout.addWidget(self.character)
+        self.movie = QMovie("resource/avatar_walk1_default.gif", QByteArray(), self)
+        self.character = QLabel('asd', self)
+        character.initial(self, self.character, self.movie)
 
         # skill
-        self.skill = Skill()
-        main_layout.addWidget(self.skill)
+        self.movie = self.movie = QMovie("resource/skill_6.gif", QByteArray(), self)
+        self.skill = QLabel(self)
+        skills.showSkill.initial(self, self.skill, self.movie)
 
     def keyPressEvent(self, event):
-        self.character.keyPressEvent(event)
+        character.keyPressEvent2(self, event)
+
         if event.key() == Qt.Key_Escape:
             self.close()
-
-    def keyReleaseEvent(self, event):
-        self.character.keyReleaseEvent(event)
-
+    #
+    # def keyReleaseEvent(self, event):
+    #     self.character.keyReleaseEvent(event)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
