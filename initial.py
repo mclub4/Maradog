@@ -6,6 +6,8 @@ from PyQt5.QtCore import *
 from resource_path import *
 from monsters import initial_monster
 import sys
+import time
+import threading
 
 global check
 check = True
@@ -47,6 +49,17 @@ class Main(QWidget):
         self.movie = QMovie(slime, QByteArray(), self)
         self.monster = QLabel('', self)
         initial_monster.initial(self, self.monster, self.movie)
+
+        self.ronaldo_thread = threading.Thread(target=self.ronaldo)
+        self.ronaldo_thread.start()
+
+    def ronaldo(self):
+        while True:
+            if self.character.pos().x() > self.monster.pos().x():
+                self.monster.setVisible(False)
+                break
+            self.monster.move(self.monster.pos().x() - 5, self.monster.pos().y())
+            time.sleep(0.05)
 
     def keyPressEvent(self, event):
         showSkill.skill_activate(self, event)
@@ -104,7 +117,6 @@ class Main(QWidget):
                 self.is_first_release_left = False
                 self.is_first_left = True
                 self.character.move(self.current_x, self.current_y)
-            
 
 
 if __name__ == "__main__":
