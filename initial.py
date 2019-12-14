@@ -3,8 +3,11 @@ import skills.showSkill as showSkill
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from resource_path import *
 import sys
 
+global check
+check = True
 
 class Main(QWidget):
     def __init__(self, parent=None):
@@ -22,7 +25,7 @@ class Main(QWidget):
         self.setWindowTitle("Forest of Patience")
 
         # background
-        background_image = QImage('resource/back_ground_4.png')
+        background_image = QImage(background)
         modified_background_image = background_image.scaled(QSize(2000, 1080))
         palette = QPalette()
         palette.setBrush(10, QBrush(modified_background_image))
@@ -34,21 +37,26 @@ class Main(QWidget):
         self.skill.setVisible(False)
 
         # character
-        self.movie = QMovie("resource/avatar_walk1_default.gif", QByteArray(), self)
-        self.character = QLabel('asd', self)
+        self.movie = QMovie(ch_stand, QByteArray(), self)
+        self.character = QLabel('', self)
         character.initial(self, self.character, self.movie)
 
+
+
     def keyPressEvent(self, event):
-        # initial skill key event
         showSkill.skill_activate(self, event)
+        # initial skill key event
+        # character.keyPressEvent2(self, event)
+        global check
 
         self.current_x = self.character.pos().x()
         self.current_y = self.character.pos().y()
         # right
         if event.key() == Qt.Key_D:
-            if self.is_first_right:
+            if self.is_first_right and check == True:
                 # initial character
-                self.movie = QMovie('resource/avatar_walk1_default_flip.gif', QByteArray(), self)
+                print(check)
+                self.movie = QMovie(ch_walk, QByteArray(), self)
                 character.initial(self, self.character, self.movie)
                 self.is_first_right = False
                 self.is_first_left = True
@@ -59,7 +67,7 @@ class Main(QWidget):
         elif event.key() == Qt.Key_A:
             if self.is_first_left:
                 # initial character
-                self.movie = QMovie('resource/avatar_walk1_default.gif', QByteArray(), self)
+                self.movie = QMovie(ch_walk, QByteArray(), self)
                 character.initial(self, self.character, self.movie)
                 self.is_first_right = True
                 self.is_first_left = False
@@ -72,11 +80,12 @@ class Main(QWidget):
     def keyReleaseEvent(self, event):
         self.current_x = self.character.pos().x()
         self.current_y = self.character.pos().y()
+        global check
         key = event.key()
         # release right
         if key == 68 and not event.isAutoRepeat():
             if self.is_first_release_right:
-                self.movie = QMovie('resource/avatar_stand1_default_flip.gif', QByteArray(), self)
+                self.movie = QMovie(ch_stand, QByteArray(), self)
                 character.initial(self, self.character, self.movie)
                 self.is_first_release_right = False
                 self.is_first_right = True
@@ -85,7 +94,7 @@ class Main(QWidget):
         # release left
         elif key == 65 and not event.isAutoRepeat():
             if self.is_first_release_left:
-                self.movie = QMovie('resource/avatar_stand1_default.gif', QByteArray(), self)
+                self.movie = QMovie(ch_stand, QByteArray(), self)
                 character.initial(self, self.character, self.movie)
                 self.is_first_release_left = False
                 self.is_first_left = True
