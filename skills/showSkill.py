@@ -21,8 +21,8 @@ def skill_activate(self, event):
                     self.skill.setVisible(False)
                     self.character.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
                     self.character.setAlignment(Qt.AlignCenter)
-
                     self.character.resize(86, 180)
+                    self.character.move(self.character.pos().x(), 780)
                     self.movie = QMovie(ch_stand, QByteArray(), self)
                     self.movie.setCacheMode(QMovie.CacheAll)
                     self.character.setMovie(self.movie)
@@ -33,6 +33,7 @@ def skill_activate(self, event):
             self.skill.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             self.skill.setAlignment(Qt.AlignCenter)
             self.character.resize(86,137)
+            self.character.move(self.character.pos().x(), 820)
             self.movie = QMovie('resource/skill_6.gif', QByteArray(), self)
             self.movie.setCacheMode(QMovie.CacheAll)
             self.skill.setMovie(self.movie)

@@ -1,14 +1,11 @@
 import character
-import skills.showSkill as showSkill
+from skills.showSkill import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from resource_path import *
 from monsters import initial_monster
 import sys
-
-global check
-check = True
 
 
 class Main(QWidget):
@@ -49,11 +46,11 @@ class Main(QWidget):
         initial_monster.initial(self, self.monster, self.movie)
 
     def keyPressEvent(self, event):
-        showSkill.skill_activate(self, event)
+        skill_activate(self, event)
         # initial skill key event
         # character.keyPressEvent2(self, event)
         global check
-
+        print(check)
         self.current_x = self.character.pos().x()
         self.current_y = self.character.pos().y()
         # right
