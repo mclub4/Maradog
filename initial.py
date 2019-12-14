@@ -42,10 +42,13 @@ class Main(QWidget):
         character.initial(self, self.character, self.movie)
 
 
+
     def keyPressEvent(self, event):
+        showSkill.skill_activate(self, event)
+        # initial skill key event
         # character.keyPressEvent2(self, event)
         global check
-        showSkill.skill_activate(self, event)
+
         self.current_x = self.character.pos().x()
         self.current_y = self.character.pos().y()
         # right
