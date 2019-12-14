@@ -4,7 +4,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from resource_path import *
+from monsters import initial_monster
 import sys
+
 
 class Main(QWidget):
     def __init__(self, parent=None):
@@ -38,7 +40,10 @@ class Main(QWidget):
         self.character = QLabel('', self)
         character.initial(self, self.character, self.movie)
 
-
+        # monster
+        self.movie = QMovie(slime, QByteArray(), self)
+        self.monster = QLabel('', self)
+        initial_monster.initial(self, self.monster, self.movie)
 
     def keyPressEvent(self, event):
         skill_activate(self, event)
