@@ -40,6 +40,8 @@ class Main(QWidget):
         self.movie = QMovie(ch_stand, QByteArray(), self)
         self.character = QLabel('', self)
         character.initial(self, self.character, self.movie)
+
+
     def keyPressEvent(self, event):
         # character.keyPressEvent2(self, event)
         global check

@@ -21,7 +21,7 @@ def skill_activate(self, event):
                     self.skill.setVisible(False)
                     self.character.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
                     self.character.setAlignment(Qt.AlignCenter)
-                    self.character.resize(86, 180)
+                    self.character.resize(101, 76)
                     self.movie = QMovie(ch_stand, QByteArray(), self)
                     self.movie.setCacheMode(QMovie.CacheAll)
                     self.character.setMovie(self.movie)
