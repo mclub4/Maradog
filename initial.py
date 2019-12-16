@@ -168,7 +168,7 @@ class Main(QWidget):
         self.character.move(100, 820)
 
         # protect
-        self.movie_protect = QMovie(protect_1, QByteArray(), self)
+        self.movie_protect = QMovie(protect_2, QByteArray(), self)
         character.ob_initial(self, self.protect, self.movie_protect)
 
         # machine
