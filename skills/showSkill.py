@@ -52,7 +52,6 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
                     self.show_buff.setText(str(tmp_skill.buff))
                 start_timer(timer_func, tmp_skill.getTime())
 
-                
 def start_timer(slot, count=1, interval=100):
     counter = 0
 

@@ -40,10 +40,19 @@ class bind:
         return self.__skill_action_time
 
     def getDamage(self):
-        return self.__skill_damage, self.__is_bind
+        return self.__skill_damage
+
+    def IsBind(self):
+        return self.__is_bind
 
     def getRange(self):
         return self.__skill_range
 
     def getCoolTime(self):
         return self.__skill_cool_time
+
+    def setCoolTime(self):
+        pass
+
+    def getIndex(self):
+        return 0
