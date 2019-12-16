@@ -47,3 +47,9 @@ class crossing:
 
     def getCoolTime(self):
         return self.__skill_cool_time
+
+    def setCoolTime(self):
+        pass
+
+    def getIndex(self):
+        return 0
