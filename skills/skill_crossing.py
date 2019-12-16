@@ -5,9 +5,9 @@ from PyQt5.QtCore import *
 class crossing:
     def __init__ (self):
         # private
-        self.__skill_action_time = 0.9
-        self.__skill_damage = 10
-        self.__skill_range = 500
+        self.__skill_action_time = 0.75
+        self.__skill_damage = 50
+        self.__skill_range = 700
         self.__skill_cool_time = 3
 
     def change_image(self, skill):

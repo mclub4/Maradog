@@ -4,15 +4,26 @@ from PyQt5.QtCore import *
 from resource_path import *
 #import skills.skill_crossing as sk
 import skills.skill_crossing as crossing
+import initial
 
-def skill_activate(self, event):
+def skill_activate(self, event, monster_list, monster_attribute, character):
     for key in skill_dic.keys():
         if event.key() == key and self.start:
             tmp_skill = skill_dic[key]
             if self.using_skill == False and tmp_skill.getCoolTime()>0:
                 self.using_skill = True
+
+                # monster processing
+                for i in range(len(monster_list)):
+                    skill_range = tmp_skill.getRange()
+                    skill_damage = tmp_skill.getDamage()
+                    if skill_range > monster_list[i].pos().x() - character.pos().x() and character.pos().x() < monster_list[i].pos().x():
+                        monster_attribute[i].hp -= skill_damage
+                        print(monster_attribute[i].hp)
+
+
                 def timer_func(count):
-                    print('Timer:', count)
+                    # print('Timer:', count)
                     if count >= tmp_skill.getTime():
                         self.using_skill = False
                         self.skill.setVisible(False)
@@ -41,8 +52,10 @@ def skill_activate(self, event):
                     self.show_buff.setText(str(tmp_skill.buff))
                 start_timer(timer_func, tmp_skill.getTime())
 
+                
 def start_timer(slot, count=1, interval=100):
     counter = 0
+
     def handler():
         nonlocal counter
         counter += 0.1
