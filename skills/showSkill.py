@@ -9,7 +9,7 @@ def skill_activate(self, event):
     for key in skill_dic.keys():
         if event.key() == key and self.start:
             tmp_skill = skill_dic[key]
-            if self.using_skill == False:
+            if self.using_skill == False and tmp_skill.getCoolTime()>0:
                 self.using_skill = True
                 def timer_func(count):
                     print('Timer:', count)
@@ -27,35 +27,19 @@ def skill_activate(self, event):
                         self.movie.loopCount()
                 tmp_skill.change_image(self.skill)
                 tmp_skill.place_skill(self.skill, self.character)
+                tmp_skill.setCoolTime()
+                index = tmp_skill.getIndex()
+                self.cooltime[index].setText(str(self.cooltime_value[index].getCoolTime()))
+                if(tmp_skill.getCoolTime()<=0):
+                    self.disabled_image = QPixmap("resource/skill_icon_" + str(index+1) + "_disabled.png")
+                    self.disabled_image = self.disabled_image.scaled(100, 100)
+                    self.skillicon[index].setPixmap(self.disabled_image)
+                if(key == Qt.Key_L):
+                    self.is_buff.setVisible(True)
+                    self.show_buff.setVisible(True)
+                    tmp_skill.buff += 1
+                    self.show_buff.setText(str(tmp_skill.buff))
                 start_timer(timer_func, tmp_skill.getTime())
-
-    # elif event.key() == Qt.Key_E :
-    #     # global check
-    #     if check == True:
-    #         check = False
-    #         def timer_func(count):
-    #             global check
-    #             # print('Timer:', count)
-    #             if count >= 1.3:
-    #                 check = True
-    #                 self.skill.setVisible(False)
-    #
-    #         self.movie = QMovie(ch_attack1, QByteArray(), self)
-    #         ch.initial(self, self.character, self.movie)
-    #         self.skill.setVisible(True)
-    #         self.skill.resize(872, 242)
-    #         self.skill.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-    #         self.skill.setAlignment(Qt.AlignCenter)
-    #         self.movie = QMovie('resource/skill_bind.gif', QByteArray(), self)
-    #         self.movie.setCacheMode(QMovie.CacheAll)
-    #         self.skill.setMovie(self.movie)
-    #         self.movie.start()
-    #         self.movie.loopCount()
-    #         self.skill.move(self.character.pos().x() + 50, self.character.pos().y() - 80)
-    #         start_timer(timer_func, 1.3)
-        # loop = QEventLoop()
-        # QTimer.singleShot(10000, loop.quit)
-        # loop.exec_()
 
 def start_timer(slot, count=1, interval=100):
     counter = 0
@@ -69,30 +53,3 @@ def start_timer(slot, count=1, interval=100):
     timer = QTimer()
     timer.timeout.connect(handler)
     timer.start(interval)
-
-
-# def skill_activate(self, event):
-#     if event.key() == Qt.Key_Q:
-#         start_timer()
-#         self.skill.setVisible(True)
-#         self.skill.resize(872, 242)
-#         self.skill.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-#         self.skill.setAlignment(Qt.AlignCenter)
-#         self.movie = QMovie('resource/skill_6.gif', QByteArray(), self)
-#         self.movie.setCacheMode(QMovie.CacheAll)
-#         self.skill.setMovie(self.movie)
-#         self.movie.start()
-#         self.skill.move(self.character.pos().x()+50, self.character.pos().y()-80)
-#
-#
-# def start_timer():
-#     current_timer = QTimer()
-#     print('launch')
-#     current_timer.timeout.connect(print_hello)
-#     current_timer.setSingleShot(True)
-#     current_timer.start(3000)
-#     print('reach end')
-#
-#
-# def print_hello():
-#     print('hi')
