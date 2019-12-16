@@ -13,6 +13,8 @@ protect_2 = "resource/protect_2.gif"
 protect_2_dead = "resource/protect_2_dead.gif"
 
 slime = "resource/monster_slime.gif"
+orange_mushroom = "resource/monster_orange_mushroom.gif"
+ribbon_pig = "resource/monster_ribbon_pig.gif"
 
 background = ['resource/back_ground_4.png']
 
@@ -20,7 +22,7 @@ skill_1 = "resource/skill_1.gif"
 skill_2 = "resource/skill_2.gif"
 skill_obj_1 = crossing.crossing()
 skill_obj_2 = bind.bind()
-skill_dic = {Qt.Key_Q : skill_obj_1, Qt.Key_E : skill_obj_2}
+skill_dic = {Qt.Key_Q: skill_obj_1, Qt.Key_E: skill_obj_2}
 
 
 machine_1 = "resource/machine.png"

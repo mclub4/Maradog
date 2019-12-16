@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 
-class Slime:
+class RibbonPig:
     def __init__(self):
         self.hp = 100
         self.__score = 20
