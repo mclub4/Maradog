@@ -10,7 +10,7 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
     for key in skill_dic.keys():
         if event.key() == key and self.start:
             tmp_skill = skill_dic[key]
-            if self.using_skill == False:
+            if self.using_skill == False and tmp_skill.getCoolTime()>0:
                 self.using_skill = True
 
                 # monster processing
@@ -38,9 +38,21 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
                         self.movie.loopCount()
                 tmp_skill.change_image(self.skill)
                 tmp_skill.place_skill(self.skill, self.character)
+                tmp_skill.setCoolTime()
+                index = tmp_skill.getIndex()
+                self.cooltime[index].setText(str(self.cooltime_value[index].getCoolTime()))
+                if(tmp_skill.getCoolTime()<=0):
+                    self.disabled_image = QPixmap("resource/skill_icon_" + str(index+1) + "_disabled.png")
+                    self.disabled_image = self.disabled_image.scaled(100, 100)
+                    self.skillicon[index].setPixmap(self.disabled_image)
+                if(key == Qt.Key_L):
+                    self.is_buff.setVisible(True)
+                    self.show_buff.setVisible(True)
+                    tmp_skill.buff += 1
+                    self.show_buff.setText(str(tmp_skill.buff))
                 start_timer(timer_func, tmp_skill.getTime())
 
-
+                
 def start_timer(slot, count=1, interval=100):
     counter = 0
 
