@@ -7,6 +7,8 @@ def initial(self, monster, movie):
     monster.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
     monster.setAlignment(Qt.AlignCenter)
     monster.move(800, 820)
+    monster.resize(74,92)
+    monster.setVisible(True)
     movie.setCacheMode(QMovie.CacheAll)
     monster.setMovie(self.movie)
     movie.start()
