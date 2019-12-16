@@ -259,13 +259,16 @@ class Main(QWidget):
     def monster_thread(self):
         dead_monster_count = 5
         while not self.thread_end:
+            self.cur_score = 0
             for i in range(len(self.monster_list)):
                 if self.monster_attribute_class[i].hp <= 0:
                     self.monster_list[i].setVisible(False)
+                    self.current_score.setText('현재 점수 : ' + str(self.cur_score + self.monster_attribute_class[i].get_score()) + '점')
+                    self.cur_score = self.cur_score + self.monster_attribute_class[i].get_score()
 
                 if self.protect.pos().x() > self.monster_list[i].pos().x() - 50:
                     if self.monster_list[i].isVisible():
-                        self.remaining_life -= 101
+                        self.remaining_life -= 34
                         self.life.setText('보호대상의 체력 : ' + str(self.remaining_life) + ' / 100')
                     self.monster_list[i].setVisible(False)
                     # if self.remaining_life <= 0:
