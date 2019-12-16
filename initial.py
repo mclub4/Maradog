@@ -24,6 +24,7 @@ class Main(QWidget):
         # initial mainWindow
         self.resize(1440, 627)
         self.setWindowTitle("Forest of Patience")
+        self.setWindowIcon(QIcon("resource/maplestory.ico"))
 
         # background
         background_image = QImage(background[0])
@@ -49,8 +50,9 @@ class Main(QWidget):
         # highscore_out
         self.highscore = QLabel(self)
         self.highscore.setText('최고점수 : '+str(max(self.scoredb))+'점')
-        self.highscore.move(900, 650)
+        self.highscore.move(800, 780)
         self.highscore.setFont(QFont("Arial", 40, QFont.Black))
+        self.highscore.setStyleSheet("color:gold")
 
         # life
         self.life = QLabel(self)
@@ -79,18 +81,26 @@ class Main(QWidget):
         self.current_wave.move(1670, 20)
         self.current_wave.setVisible(False)
 
+        #title
+        self.title = QLabel(self)
+        self.title.move(500, 5)
+        self.image = QPixmap("resource/title.png")
+        self.title.setPixmap(self.image)
+
         # self.highscore.setVisible(True)
         # GameStart_btn
         self.gameStart_btn = QPushButton("게임 시작",self)
-        self.gameStart_btn.move(600,430)
+        self.gameStart_btn.move(500,500)
         self.gameStart_btn.resize(250, 150)
-        self.gameStart_btn.setStyleSheet("background-color: orange")
+        self.gameStart_btn.setFont(QFont("Arial", 40, QFont.Bold))
+        self.gameStart_btn.setStyleSheet("background-color: gold")
         self.gameStart_btn.clicked.connect(self.buttonEvent)
         self.close_btn = QPushButton("게임 종료", self)
-        self.close_btn.move(1200, 430)
+        self.close_btn.move(1200, 500)
         self.close_btn.resize(250,150)
         self.close_btn.clicked.connect(self.buttonEvent)
-        self.close_btn.setStyleSheet("background-color: orange")
+        self.close_btn.setFont(QFont("Arial", 40, QFont.Bold))
+        self.close_btn.setStyleSheet("background-color: gold")
 
     def gameStart(self):
         self.start = True
@@ -100,6 +110,7 @@ class Main(QWidget):
         self.current_score.setVisible(True)
         self.life.setVisible(True)
         self.current_wave.setVisible(True)
+        self.title.setVisible(False)
         # skill
         # self.movie = self.movie = QMovie("resource/skill_6.gif", QByteArray(), self)
         # self.skill = QLabel(self)
@@ -112,7 +123,7 @@ class Main(QWidget):
         self.character.move(100, 820)
 
         # protect
-        self.movie = QMovie(protect_1, QByteArray(), self)
+        self.movie = QMovie(protect_2, QByteArray(), self)
         character.ob_initial(self, self.protect, self.movie)
 
         # machine
@@ -122,11 +133,14 @@ class Main(QWidget):
         # Skill_icon
         self.skillicon = []
         self.cooltime = []
+        self.cooltime_value = list(skill_dic.values())
         self.icon_x = 1700
-        for i in range(0, 2):
+        for i in range (len(skill_dic)):
             self.icon = QLabel(self)
             self.skillicon.append(self.icon)
-            self.cool = QLabel('5',self)
+            self.cool = QLabel(self)
+            print(self.cooltime_value[i].getCoolTime)
+            self.cool.setText(str(self.cooltime_value[i].getCoolTime()))
             self.cool.setFont(QFont("Arial", 40, QFont.Bold))
             self.cool.setStyleSheet("color: black")
             self.cooltime.append(self.cool)
@@ -168,7 +182,7 @@ class Main(QWidget):
                 if (self.remaining_life <= 0):
                     self.protect.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
                     self.protect.setAlignment(Qt.AlignCenter)
-                    self.movie = QMovie(protect_1_dead, QByteArray(), self)
+                    self.movie = QMovie(protect_2_dead, QByteArray(), self)
                     self.movie.setCacheMode(QMovie.CacheAll)
                     self.protect.setMovie(self.movie)
                     self.protect.resize(106, 75)
@@ -195,8 +209,8 @@ class Main(QWidget):
         self.current_x = self.character.pos().x()
         self.current_y = self.character.pos().y()
         # right
-        if event.key() == Qt.Key_D:
-            if self.is_first_right and not self.using_skill and self.start:
+        if event.key() == Qt.Key_D and not self.using_skill and self. start:
+            if self.is_first_right:
                 # initial character
                 self.movie = QMovie(ch_walk, QByteArray(), self)
                 character.ch_initial(self, self.character, self.movie)
@@ -206,7 +220,7 @@ class Main(QWidget):
             self.character.move(self.current_x + 5, self.current_y)
 
         # left
-        elif event.key() == Qt.Key_A:
+        elif event.key() == Qt.Key_A and not self.using_skill and self. start:
             if self.is_first_left:
                 # initial character
                 self.movie = QMovie(ch_walk, QByteArray(), self)
@@ -218,6 +232,7 @@ class Main(QWidget):
 
         else:
             showSkill.skill_activate(self, event)
+
         if event.key() == Qt.Key_Escape:
             self.close()
 
