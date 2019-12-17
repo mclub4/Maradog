@@ -14,3 +14,6 @@ class RibbonPig:
 
     def set_hp(self, hp):
         self.hp = hp
+
+    def get_score(self):
+        return self.__score

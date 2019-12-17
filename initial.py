@@ -92,7 +92,7 @@ class Main(QWidget):
 
         #gold
         self.current_gold = QLabel(self)
-        self.gold = 0
+        self.gold = 9999999999999
         self.current_gold.setText(str(self.gold) + '골드')
         self.current_gold.resize(640,60)
         self.current_gold.setFont(QFont("Arial", 40, QFont.Bold))
@@ -259,18 +259,22 @@ class Main(QWidget):
     def monster_thread(self):
         dead_monster_count = 5
         while not self.thread_end:
+            # self.cur_score = 0///
             for i in range(len(self.monster_list)):
                 if self.monster_attribute_class[i].hp <= 0:
                     self.monster_list[i].setVisible(False)
+                    self.current_score.setText('현재 점수 : ' + str(self.score + self.monster_attribute_class[i].get_score()) + '점')
+                    self.score = self.score + self.monster_attribute_class[i].get_score()
 
                 if self.protect.pos().x() > self.monster_list[i].pos().x() - 50:
                     if self.monster_list[i].isVisible():
-                        self.remaining_life -= 101
+                        self.remaining_life -= 34
                         self.life.setText('보호대상의 체력 : ' + str(self.remaining_life) + ' / 100')
                     self.monster_list[i].setVisible(False)
-                    # if self.remaining_life <= 0:
-                        # TODO
-                        # when protect id dead
+                    if self.remaining_life <= 0:
+                        self.current_score.setText('죽음')
+                        self.scoredb.append(self.score)
+                        self.thread_end = True
                 self.monster_list[i].move(self.monster_list[i].pos().x() - 5, self.monster_list[i].pos().y())
                 time.sleep(0.05)
 
