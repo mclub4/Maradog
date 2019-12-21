@@ -5,5 +5,5 @@ from initial import Main
 
 app = QApplication(sys.argv)
 main = Main()
-main.show()
+main.showFullScreen()
 sys.exit(app.exec_())
