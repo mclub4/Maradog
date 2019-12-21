@@ -1,10 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 from resource_path import *
-#import skills.skill_crossing as sk
-import skills.skill_crossing as crossing
-import initial
+from resource_path import skill_obj_3
 
 def skill_activate(self, event, monster_list, monster_attribute, character):
     for key in skill_dic.keys():
@@ -12,16 +9,16 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
             tmp_skill = skill_dic[key]
             if self.using_skill == False and tmp_skill.getCoolTime()>0:
                 self.using_skill = True
-
                 # monster processing
                 for i in range(len(monster_list)):
                     skill_range = tmp_skill.getRange()
                     skill_damage = tmp_skill.getDamage()
                     if skill_range > monster_list[i].pos().x() - character.pos().x() and character.pos().x() < monster_list[i].pos().x():
-                        monster_attribute[i].hp -= skill_damage
-                        print(monster_attribute[i].hp)
-
-
+                        if skill_obj_3.buff > 0:
+                            monster_attribute[i].hp -= skill_damage*skill_obj_3.buff
+                            print(monster_attribute[i].hp)
+                        else:
+                            monster_attribute[i].hp -= skill_damage
                 def timer_func(count):
                     # print('Timer:', count)
                     if count >= tmp_skill.getTime():

@@ -2,14 +2,21 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from resource_path import *
+import skills.Skill_Structure as sk
 
-class bind:
+class bind(sk.Skill_Structure):
     def __init__ (self):
         # private
-        self.__skill_action_time = 1.5
-        self.__skill_damage = 40
-        self.__skill_range = 920
-        self.__skill_cool_time = 3
+        import resource_path as rp
+        self.skill_action_time = 1.5
+        self.skill_damage = 40
+        self.skill_range = 920
+        self.skill_cool_time = 3
+        self.skill_original_time = 3
+        self.skill_image = rp.skill_2
+        self.skill_position_x = 60
+        self.skill_position_y = -430
+        self.skill_index = 1
         self.__is_bind = True
 
     def change_image(self, skill):
@@ -22,37 +29,3 @@ class bind:
         skill.setMovie(self.movie)
         self.movie.start()
         self.movie.loopCount()
-
-    def place_skill(self,skill, character):
-        character.resize(146, 71)
-        character.move(character.pos().x(), 820)
-        character.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        character.setAlignment(Qt.AlignCenter)
-        self.movie = QMovie("resource/character_attack_2", QByteArray())
-        character.move(character.pos().x(), 820)
-        self.movie.setCacheMode(QMovie.CacheAll)
-        character.setMovie(self.movie)
-        self.movie.start()
-        self.movie.loopCount()
-        skill.move(character.pos().x() + 60, character.pos().y() - 430)
-
-    def getTime(self):
-        return self.__skill_action_time
-
-    def getDamage(self):
-        return self.__skill_damage
-
-    def IsBind(self):
-        return self.__is_bind
-
-    def getRange(self):
-        return self.__skill_range
-
-    def getCoolTime(self):
-        return self.__skill_cool_time
-
-    def setCoolTime(self):
-        pass
-
-    def getIndex(self):
-        return 0
