@@ -6,9 +6,11 @@ from monsters import initial_monster
 
 class OrangeMushroom:
     def __init__(self):
-        self.hp = 120
+        self.hp = 200
         self.__score = 20
         self.__gold = 40
+        self.killed = False
+        self.original_hp = 120
 
     def get_hp(self):
         return self.hp
@@ -18,3 +20,9 @@ class OrangeMushroom:
 
     def get_score(self):
         return self.__score
+
+    def back_hp(self):
+        self.hp = self.original_hp
+
+    def get_gold(self):
+        return self.__gold

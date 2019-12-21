@@ -17,7 +17,7 @@ class DB_Read:
             pass
         self.file.close()
 
-    def readScoreDB(self):
+    def checkScoreDB(self):
         if len(self.scoredb) == 0:
             self.scoredb = [0]
         return self.scoredb

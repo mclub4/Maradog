@@ -1,27 +1,21 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import skills.Skill_Structure as sk
 
-class buff:
+class buff(sk.Skill_Structure):
     def __init__ (self):
-        # private
-        self.__skill_action_time = 1.2
-        self.__skill_damage = 0
-        self.__skill_range = 0
-        self.__skill_cool_time = 1
-        self.buff = 0
-
-    def change_image(self, skill):
         import resource_path as rp
-        skill.setVisible(True)
-        skill.resize(694, 400)
-        skill.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        skill.setAlignment(Qt.AlignCenter)
-        self.movie = QMovie(rp.skill_3, QByteArray())
-        self.movie.setCacheMode(QMovie.CacheAll)
-        skill.setMovie(self.movie)
-        self.movie.start()
-        self.movie.loopCount()
+        self.skill_action_time = 1.2
+        self.skill_damage = 0
+        self.skill_range = 0
+        self.skill_cool_time = 1
+        self.skill_original_time = 1
+        self.skill_index = 2
+        self.buff = 0
+        self.skill_image = rp.skill_3
+        self.skill_width = 694
+        self.skill_height = 400
 
     def place_skill(self,skill, character):
         import resource_path as rp
@@ -36,24 +30,3 @@ class buff:
         self.movie.start()
         self.movie.loopCount()
         skill.move(character.pos().x() - 300, character.pos().y() - 320)
-
-    def getTime(self):
-        return self.__skill_action_time
-
-    def getDamage(self):
-        return self.__skill_damage
-
-    def getRange(self):
-        return self.__skill_range
-
-    def getCoolTime(self):
-        return self.__skill_cool_time
-
-    def setCoolTime(self):
-        self.__skill_cool_time -= 1
-
-    def backCoolTime(self):
-        self.__skill_cool_time = 1
-
-    def getIndex(self):
-        return 2
