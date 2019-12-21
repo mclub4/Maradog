@@ -8,7 +8,7 @@ class OrangeMushroom:
     def __init__(self):
         self.hp = 200
         self.__score = 20
-        self.__gold = 40
+        self.__gold = 400
         self.killed = False
         self.original_hp = 120
 

@@ -7,7 +7,7 @@ class Slime:
     def __init__(self):
         self.hp = 80
         self.__score = 20
-        self.__gold = 30
+        self.__gold = 600
         self.killed = False
         self.original_hp = 100
 

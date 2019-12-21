@@ -1,15 +1,16 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from monsters import initial_monster
 
 
-class RibbonPig:
+class Fox:
     def __init__(self):
-        self.hp = 150
+        self.hp = 140
         self.__score = 20
-        self.__gold = 500
+        self.__gold = 300
         self.killed = False
-        self.original_hp = 100
+        self.original_hp = 120
 
     def get_hp(self):
         return self.hp

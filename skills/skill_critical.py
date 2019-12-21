@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import skills.Skill_Structure as sk
 
+
 class critical(sk.Skill_Structure):
     def __init__ (self):
         # private

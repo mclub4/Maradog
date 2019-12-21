@@ -7,7 +7,7 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
     for key in skill_dic.keys():
         if event.key() == key and self.start:
             tmp_skill = skill_dic[key]
-            if self.using_skill == False and tmp_skill.getCoolTime()>0:
+            if self.using_skill == False and tmp_skill.getCoolTime() > 0:
                 self.using_skill = True
                 # monster processing
                 for i in range(len(monster_list)):
@@ -15,7 +15,7 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
                     skill_damage = tmp_skill.getDamage()
                     if skill_range > monster_list[i].pos().x() - character.pos().x() and character.pos().x() < monster_list[i].pos().x():
                         if skill_obj_3.buff > 0:
-                            monster_attribute[i].hp -= skill_damage*skill_obj_3.buff
+                            monster_attribute[i].hp -= skill_damage + (skill_obj_3.buff * 10)
                             print(monster_attribute[i].hp)
                         else:
                             monster_attribute[i].hp -= skill_damage

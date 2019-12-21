@@ -8,7 +8,7 @@ import monsters.monster_slime as slime
 from monsters import initial_monster
 from level import *
 import sys, time, threading, read_score, bgm
-from monsters import monster_slime, monster_orange_mushroom, monster_ribbon_pig
+from monsters import monster_slime, monster_orange_mushroom, monster_ribbon_pig, monster_fox, monster_bird
 import monsters.initial_monster
 
 
@@ -98,16 +98,16 @@ class Main(QWidget):
         self.buff_image = self.buff_image.scaled(50, 50)
         self.is_buff = QLabel(self)
         self.is_buff.setPixmap(self.buff_image)
-        self.is_buff.move(10,240)
+        self.is_buff.move(10, 240)
         self.number_buff = 0
-        self.show_buff = QLabel('2',self)
+        self.show_buff = QLabel('2', self)
         self.show_buff.setFont(QFont("Arial", 20, QFont.Bold))
-        self.show_buff.move(40,238)
+        self.show_buff.move(40, 238)
         self.is_buff.setVisible(False)
         self.show_buff.setVisible(False)
 
         # GameStart_btn
-        self.gameStart_btn = QPushButton("게임 시작",self)
+        self.gameStart_btn = QPushButton("게임 시작", self)
         self.gameStart_btn.move(500,500)
         self.gameStart_btn.resize(250, 150)
         self.gameStart_btn.setFont(QFont("Arial", 40, QFont.Bold))
@@ -115,7 +115,7 @@ class Main(QWidget):
         self.gameStart_btn.clicked.connect(self.buttonEvent)
         self.close_btn = QPushButton("게임 종료", self)
         self.close_btn.move(1200, 500)
-        self.close_btn.resize(250,150)
+        self.close_btn.resize(250, 150)
         self.close_btn.clicked.connect(self.buttonEvent)
         self.close_btn.setFont(QFont("Arial", 40, QFont.Bold))
         self.close_btn.setStyleSheet("background-color: gold")
@@ -203,15 +203,18 @@ class Main(QWidget):
         self.monster_speed = 1
         self.wave = 1
         self.monster_list = []
-        self.monster_image_list = [slime, orange_mushroom, ribbon_pig]
+        self.monster_image_list = [slime, orange_mushroom, ribbon_pig, fox, bird]
         slime_attribute = monsters.monster_slime.Slime()
         orange_mushroom_attribute = monsters.monster_orange_mushroom.OrangeMushroom()
         ribbon_pig_attribute = monsters.monster_ribbon_pig.RibbonPig()
-        self.monster_attribute_class = [slime_attribute, orange_mushroom_attribute, ribbon_pig_attribute]
+        fox_attribute = monsters.monster_fox.Fox()
+        bird_attribute = monsters.monster_bird.Bird()
+
+        self.monster_attribute_class = [slime_attribute, orange_mushroom_attribute, ribbon_pig_attribute, fox_attribute, bird_attribute]
 
         is_first = False
         i = 1
-        while i < 4:
+        while i < 6:
             if not is_first:
                 m = QLabel(self)
                 mv = QMovie(self.monster_image_list[i-1], QByteArray(), self)
