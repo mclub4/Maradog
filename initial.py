@@ -106,16 +106,16 @@ class Main(QWidget):
         self.buff_image = self.buff_image.scaled(50, 50)
         self.is_buff = QLabel(self)
         self.is_buff.setPixmap(self.buff_image)
-        self.is_buff.move(10,240)
+        self.is_buff.move(10, 240)
         self.number_buff = 0
-        self.show_buff = QLabel('2',self)
+        self.show_buff = QLabel('2', self)
         self.show_buff.setFont(QFont("Arial", 20, QFont.Bold))
-        self.show_buff.move(40,238)
+        self.show_buff.move(40, 238)
         self.is_buff.setVisible(False)
         self.show_buff.setVisible(False)
 
         # GameStart_btn
-        self.gameStart_btn = QPushButton("게임 시작",self)
+        self.gameStart_btn = QPushButton("게임 시작", self)
         self.gameStart_btn.move(500,500)
         self.gameStart_btn.resize(250, 150)
         self.gameStart_btn.setFont(QFont("Arial", 40, QFont.Bold))
@@ -123,7 +123,7 @@ class Main(QWidget):
         self.gameStart_btn.clicked.connect(self.buttonEvent)
         self.close_btn = QPushButton("게임 종료", self)
         self.close_btn.move(1200, 500)
-        self.close_btn.resize(250,150)
+        self.close_btn.resize(250, 150)
         self.close_btn.clicked.connect(self.buttonEvent)
         self.close_btn.setFont(QFont("Arial", 40, QFont.Bold))
         self.close_btn.setStyleSheet("background-color: gold")
@@ -244,7 +244,7 @@ class Main(QWidget):
     def monster_create(self):
         is_first = False
         i = 0
-        while i < 5:
+        while i < 3:
             if not is_first:
                 mv = QMovie(self.monster_image_list[i], QByteArray(), self)
                 initial_monster.slime(self, self.monster_list[i], mv)

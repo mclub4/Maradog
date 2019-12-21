@@ -10,7 +10,7 @@ def skill_activate(self, event, monster_list, monster_attribute, character):
     for key in skill_dic.keys():
         if event.key() == key and self.start:
             tmp_skill = skill_dic[key]
-            if self.using_skill == False and tmp_skill.getCoolTime()>0:
+            if self.using_skill == False and tmp_skill.getCoolTime() > 0:
                 self.using_skill = True
 
                 # monster processing
