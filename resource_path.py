@@ -21,6 +21,8 @@ protect_2_dead = "resource/protect_2_dead.gif"
 slime = "resource/monster_slime.gif"
 orange_mushroom = "resource/monster_orange_mushroom.gif"
 ribbon_pig = "resource/monster_ribbon_pig.gif"
+fox = "resource/monster_fox.gif"
+bird = "resource/monster_bird.gif"
 
 background = ['resource/back_ground_4.png']
 
