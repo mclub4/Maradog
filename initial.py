@@ -7,7 +7,7 @@ from resource_path import *
 import monsters.monster_slime as slime
 from monsters import initial_monster
 from level import *
-import sys, time, threading, read_score, bgm
+import sys, time, threading, read_score
 from monsters import monster_slime, monster_orange_mushroom, monster_ribbon_pig, monster_fox, monster_bird
 import monsters.initial_monster
 
