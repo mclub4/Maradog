@@ -24,6 +24,7 @@ class Main(QWidget):
         self.current_y = 0
         self.thread_end = False
         self.using_skill = False
+        self.game_end = False
         # initial mainWindow
         self.resize(1440, 627)
         self.setWindowTitle("MaraDogs")
@@ -239,8 +240,9 @@ class Main(QWidget):
                     self.gold += self.monster_attribute_class[i].get_gold()
                     self.current_gold.setText(str(self.gold) + '골드')
                     self.monster_attribute_class[i].killed = True
-                    if self.score > 500*self.monster_speed:
+                    if self.score > 500*self.wave:
                         self.monster_speed += 0.5
+                        self.wave += 1
 
                 if self.protect.pos().x() > self.monster_list[i].pos().x() - 50:
                     if self.monster_list[i].isVisible():
@@ -254,6 +256,7 @@ class Main(QWidget):
                         self.life.setText('정령이 죽었습니다')
                         self.scoredb.append(self.score)
                         self.thread_end = True
+                        self.game_end = True
 
 
                 if self.monster_attribute_class[i].killed:
@@ -343,7 +346,8 @@ class Main(QWidget):
 
     def closeEvent(self, event):
         self.thread_end = True
-        self.data.writeScoreDB(self.scoredb)
+        if self.game_end:
+            self.data.writeScoreDB(self.scoredb)
 
     def keyReleaseEvent(self, event):
         self.current_x = self.character.pos().x()
