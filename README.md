@@ -5,6 +5,6 @@
 </div>
 
 # 발표 자료
-마라독 게임 프로젝트 PPT
+<p>마라독 게임 프로젝트 PPT</p>
 https://docs.google.com/presentation/d/12EtgEMmqiyVesgeKBdo7j5D2HccEgjxDjJpz9_mLAnk/edit?usp=sharing
 
